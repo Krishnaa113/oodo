@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import SignedInPage from './auth/sign-in';
 import Home from './home';
 import Dashboard from './dashboard';
+import Questions from './questions';
 import { ClerkProvider } from '@clerk/clerk-react';
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -19,14 +20,22 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: '/dashboard',
-        element: <Dashboard />
-      }
-    ]
-  },
-  {
         path: '/',
         element: <Home />
+      },
+      {
+        path: '/dashboard',
+        element: <Dashboard />
+      },
+      {
+        path: '/questions',
+        element: <Questions />
+      },
+      {
+        path: '/question/:id',
+        element: <Questions /> // This will be handled by App's route-aware rendering
+      }
+    ]
   },
   {
     path: '/auth/sign-in',
@@ -40,4 +49,4 @@ createRoot(document.getElementById('root')).render(
       <RouterProvider router={router} />
     </ClerkProvider>
   </StrictMode>
-);
+); 
